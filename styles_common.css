@@ -1,0 +1,192 @@
+/****
+*
+* CSS stylesheet for Mike Hineline Portfolio
+*
+*****/
+	body {
+		margin-top:40px;
+		margin-left:auto;
+		margin-right:auto;
+		background:#ffffff;
+		font-family:Arial,Verdana,Helvetica;
+		font-size:9pt;
+		line-height:10pt;
+	}
+	img {
+		border:0px;
+	}
+	#header {
+		margin-left:auto;
+		margin-right:auto;
+		width:50%;
+		min-height:50px;
+		clear:both;
+	}
+	.imgCenter {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	#socialProfiles {
+		position: absolute;
+		left:20px;
+		top:30px;
+	}
+	#socialMedia {
+		position: absolute;
+		right:0px;
+		top:30px;
+	}
+	#workContainerOutside {
+		border:1px solid #ffffff; /* Aligns the contained divs to the top in Chrome */
+		overflow:auto;	/* Allows container with floats to expand to height of contents */
+		clear:both;
+		margin-top:20px;
+		width:100%;
+	}
+	#workContainerInsideLeft {
+		width:48%;
+		margin-left:10px;
+		margin-right:2px;
+		float:left;
+		vertical-align:top;
+	}
+	#workContainerInsideRight {
+		float:right;
+		width:49%;
+		margin-left:2px;
+		margin-right:10px;
+		padding:0px;
+		vertical-align:top;
+	}
+	#freelanceWork {
+		overflow:auto;	/* Allows container with floats to expand to height of contents */
+		border:1px solid #cccccc;
+		width:100%;
+	}
+	#freelanceLeft {
+		float:left;
+		width:49%;
+		padding-right:2px;
+	}
+	#freelanceRight {
+		float:right;
+		width:49%;
+		padding-left:2px;
+		border-left:1px solid #cccccc;
+	}
+	#motoWork {
+		float:left;
+		border:1px solid #cccccc;
+		width:48%;
+		margin-left:0px;
+		margin-right:2px;
+		padding:0px;
+	}
+	#refineryWork {
+		float:right;
+		border:1px solid #cccccc;
+		width:48%;
+		margin-left:2px;
+		margin-right:0px;
+		padding:0px;
+	}
+	.sectionTitle {
+		padding:8px;
+		border-bottom:1px solid #cccccc;
+		color:#000000;
+		background:#eeeeee;
+		font-size:12pt;
+		line-height:14pt;
+		font-weight:bold;
+	}
+	.siteContainer {
+		margin:15px;
+		padding-bottom:20px;
+		min-height:85px;
+		border-bottom:1px solid #cccccc;
+	}
+	.siteTitle {
+		color:#0033cc;
+		font-size:10pt;
+		line-height:11pt;
+		font-weight:bold;
+	}
+	.siteThumb a {
+		float:right;
+		border:2px solid #cccccc;
+	}
+	.siteThumbNoLink {
+		float:right;
+		border:1px solid #cccccc;
+/*		border-style:ridge;	*/
+/*		border-color:#0033cc; */
+	}
+	#certificationContainer {
+		overflow:hidden;
+		border:1px solid #cccccc;
+		clear:both;
+		margin-top:20px;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	.certContainer {
+		float:left;
+		width:125px;
+		margin:20px;
+	}
+	.certIcon {
+	}
+	.certThumb {
+/*		border:2px solid #cccccc; */
+		vertical-align:top;
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		margin-bottom:10px;
+	}
+	.certDescription {
+		text-align:center;
+		font-weight:bold;
+	}
+	#analyticsContainer {
+		border:1px solid #cccccc;
+		clear:both;
+		margin-top:20px;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	.siteNote {
+		color:#666666;
+	}
+	ul.level1ul {
+		margin-top:0px;
+		margin-left:0px;
+		margin-left:-25px;
+		margin-bottom:0px;
+	}
+	li.level1li {
+	}
+	ul.level2ul {
+		margin-top:0px;
+		margin-left:0px;
+		margin-left:-25px;
+		margin-bottom:0px;
+	}
+	li.level2li {
+	}
+
+
+
+	a.flHeaderLink:link {
+		color:#ff0000;
+		text-decoration:none;
+	}
+	a.flHeaderLink:visited {
+		color:#ff0000;
+		text-decoration:none;
+	}
+	a.flHeaderLink:active {
+		color:#ff0000;
+		text-decoration:none;
+	}

@@ -14,5 +14,58 @@
   </head>
 </html>
 <body>
-  <iframe class="mainframe" src="https://electionnight.cookcountyclerkil.gov/#"></iframe>
+  <iframe id="ccframe" class="mainframe" src="https://electionnight.cookcountyclerkil.gov/#"></iframe>
+  <script>
+    /* 
+      This script modifies the Cook County election results page: 
+        https://electionnight.cookcountyclerkil.gov/#
+      by doing the following:
+        1. Auto-refreshes the page every 5 minutes
+        2. Hides all contests not relevant to Wheeling Township
+    */
+    // Set refresh interval (5 seconds = 5000 milliseconds)
+    const refreshInterval = 5000;
+  
+    // Designate the tables that should be displayed
+    let advisoryTables = [0,1,2];
+    let fedTables = [8];
+    let stateTables = [12,13,22];
+    let countyTables = [57,58,61,63,69,70,71,72,73];
+    let judgeTables = [102,103,104,114];
+    let shownTables = advisoryTables.concat(fedTables,stateTables,countyTables,judgeTables);
+
+    // Identify the main window iFrame
+    const ccframe = document.getElementById('ccframe');
+    const ccDoc = ccframe.contentDocument; // or ccframe.contentWindow.document
+// const elements = ccDoc.querySelector("selector"); // replace "selector" with your desired selector
+    
+    // Perform the following at the designated refreshInterval
+    setInterval(function() {
+      // Reload the page
+      ccframe.src = ccframe.src + '?' + new Date().getTime();  // add a query parameter to bypass cache
+      ccframe.contentWindow.location.reload(); // or iframe.contentDocument.location.reload()
+      
+      // Hide extraneous sections
+      const searchPanel = ccDoc.querySelector('.row.searchText.small.p-3.mb-3');
+      searchPanel.style.display = 'none';
+      const racePanel = ccDoc.querySelector('.row.panel.mb-3.pt-2.pb-2.pl-4.search');
+      racePanel.style.display = 'none';
+    
+      // Get all of the result tables, which are DIV elements with class "panel contest"
+      const contestPanels = ccDoc.querySelectorAll('.panel.contest');
+    
+      // Loop through the array and toggle visibility for any tables not in shownTables
+      for (let i = 0; i < contestPanels.length; i++) {
+        // Show section ID/count for easy identification of array ID/contents above
+        //  contestPanels[i].innerHTML = "<b>SECTION ID "+i+"</b>"+contestPanels[i].innerHTML;
+        if (shownTables.includes(i)) {;
+            // Ensure the DIV is visible
+            contestPanels[i].style.display = 'block';
+        } else {
+            // Hide the DIV
+            contestPanels[i].style.display = 'none';
+        }
+      }
+    }, refreshInterval);
+  </script>
 </body>

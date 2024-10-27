@@ -37,6 +37,8 @@
     // Identify the main window iFrame
     const ccframe = document.getElementById('ccframe');
     const ccDoc = ccframe.contentWindow.document; // or ccframe.contentDocument.document
+console.log("Frame: "+ccframe);
+console.log("Doc: "+ccDoc);
 // const elements = ccDoc.querySelector("selector"); // replace "selector" with your desired selector
     
     // Perform the following at the designated refreshInterval
@@ -47,13 +49,14 @@
       
       // Hide extraneous sections
       const searchPanel = ccDoc.querySelector('.row.searchText.small.p-3.mb-3');
+console.log("searchPanel: "+searchPanel);
       searchPanel.style.display = 'none';
       const racePanel = ccDoc.querySelector('.row.panel.mb-3.pt-2.pb-2.pl-4.search');
       racePanel.style.display = 'none';
     
       // Get all of the result tables, which are DIV elements with class "panel contest"
       const contestPanels = ccDoc.querySelectorAll('.panel.contest');
-    
+console.log("contestPanels: "+contestPanels);    
       // Loop through the array and toggle visibility for any tables not in shownTables
       for (let i = 0; i < contestPanels.length; i++) {
         // Show section ID/count for easy identification of array ID/contents above

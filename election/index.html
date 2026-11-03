@@ -25,10 +25,8 @@
     */
     const ccframe = document.getElementById('ccframe');
     const refreshInterval = 300000; // 5 MINUTES = 300000 ms
-    const shownTables = [0,1,2, 8, 12,13,22, 57,58,61,63,69,70,71,72,73, 102,103,104,114];
     
     function applyModifications() {
-      // Re-fetch the document EVERY time — it's a fresh object after each load
       const ccDoc = ccframe.contentWindow.document;
     
       const searchPanel = ccDoc.querySelector('.row.searchText.small.p-3.mb-3');
@@ -37,11 +35,33 @@
       const racePanel = ccDoc.querySelector('.row.panel.mb-3.pt-2.pb-2.pl-4.search');
       if (racePanel) racePanel.style.display = 'none';
     
+      // Define which races to KEEP (match by text)
+      const keepRaces = [
+        'Senator, U.S.',
+        'Governor & Lieutenant Governor, Illinois',
+        'Attorney General, State of Illinois',
+        'Secretary of State, State of Illinois',
+        'Comptroller, State of Illinois',
+        'Treasurer, State of Illinois',
+        'U.S. Representative, 5th District',
+        'State Senator, 27th District',
+        'Commissioner, Water Reclamation Dist',
+        'Commissioner, Water Reclamation Dist 2 yr',
+        'Board President, Cook County',
+        'Clerk, Cook County',
+        'Sheriff, Cook County',
+        'Treasurer, Cook County',
+        'Assessor, Cook County',
+        'State Representative, 54th District'
+      ];
+    
       const contestPanels = ccDoc.querySelectorAll('.panel.contest');
       for (let i = 0; i < contestPanels.length; i++) {
-        contestPanels[i].style.display = shownTables.includes(i) ? 'block' : 'none';
+        const text = contestPanels[i].textContent;
+        const isMatch = keepRaces.some(race => text.includes(race));
+        contestPanels[i].style.display = isMatch ? 'block' : 'none';
       }
-    }
+    }   
     
     // Run the DOM mods only after the iframe has actually loaded
     ccframe.addEventListener('load', applyModifications);

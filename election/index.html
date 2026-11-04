@@ -24,9 +24,8 @@
         2. Hides all contests not relevant to Wheeling Township
     */
     const ccframe = document.getElementById('ccframe');
-    const refreshInterval = 300000; // 5 minutes
+    const refreshInterval = 300000;
     
-    // Define which races to KEEP (match by text)
     const keepRaces = [
       'Senator, U.S.',
       'Governor & Lieutenant Governor, Illinois',
@@ -48,36 +47,50 @@
       'Board of Review, 1st District',
       'Cook County, Millionaire Tax Amendment',
       'High School District 214, Issue Bonds'
-    ];    
+    ];
+    
     function applyModifications() {
-      const proxyDoc = ccframe.contentWindow.document;
-      const innerFrame = proxyDoc.querySelector('iframe');
-      if (!innerFrame) return; // inner iframe not loaded yet
-      const ccDoc = innerFrame.contentWindow.document;
-      if (!ccDoc || !ccDoc.querySelector('.panel.contest')) return; // content not ready
+      const ccDoc = ccframe.contentWindow.document;
+      // Wait for panels to render (SPA may render after load event)
+      const check = () => {
+        const contestPanels = ccDoc.querySelectorAll('.panel.contest');
+        if (contestPanels.length === 0) {
+          setTimeout(check, 500); // retry every 500ms until panels appear
+          return;
+        }
     
-      const searchPanel = ccDoc.querySelector('.row.searchText.small.p-3.mb-3');
-      if (searchPanel) searchPanel.style.display = 'none';
+        const searchPanel = ccDoc.querySelector('.row.searchText.small.p-3.mb-3');
+        if (searchPanel) searchPanel.style.display = 'none';
     
-      const racePanel = ccDoc.querySelector('.row.panel.mb-3.pt-2.pb-2.pl-4.search');
-      if (racePanel) racePanel.style.display = 'none';
+        const racePanel = ccDoc.querySelector('.row.panel.mb-3.pt-2.pb-2.pl-4.search');
+        if (racePanel) racePanel.style.display = 'none';
     
-      const contestPanels = ccDoc.querySelectorAll('.panel.contest');
-      for (const panel of contestPanels) {
-        const text = panel.textContent;
-        panel.style.display = keepRaces.some(r => text.includes(r)) ? 'block' : 'none';
-      }
+        for (const panel of contestPanels) {
+          const text = panel.textContent;
+          panel.style.display = keepRaces.some(r => text.includes(r)) ? 'block' : 'none';
+        }
+      };
+      check();
     }
     
-    // Hook into the inner iframe's load event
-    const proxyDoc = ccframe.contentWindow.document;
-    const innerFrame = proxyDoc.querySelector('iframe');
-    innerFrame.addEventListener('load', applyModifications);
+    // Step 1: Wait for the OUTER iframe (proxy.html) to load
+    ccframe.addEventListener('load', function () {
+      const proxyDoc = ccframe.contentWindow.document;
+      const innerFrame = proxyDoc.querySelector('iframe');
+      if (!innerFrame) return;
+    
+      // Step 2: Wait for the INNER iframe (Cook County page) to load
+      innerFrame.addEventListener('load', applyModifications);
+    });
     
     // Auto-refresh every 5 minutes
     setInterval(function () {
-      const baseSrc = innerFrame.src.split('?')[0];
-      innerFrame.src = baseSrc + '?t=' + Date.now();
+      const proxyDoc = ccframe.contentWindow.document;
+      const innerFrame = proxyDoc.querySelector('iframe');
+      if (innerFrame) {
+        const baseSrc = innerFrame.src.split('?')[0];
+        innerFrame.src = baseSrc + '?t=' + Date.now();
+      }
     }, refreshInterval);
   </script>
 </body>

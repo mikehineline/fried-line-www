@@ -24,10 +24,33 @@
         2. Hides all contests not relevant to Wheeling Township
     */
     const ccframe = document.getElementById('ccframe');
-    const refreshInterval = 300000; // 5 MINUTES = 300000 ms
+    const refreshInterval = 300000; // 5 minutes
     
+    // Define which races to KEEP (match by text)
+    const keepRaces = [
+      'Senator, U.S.',
+      'Governor & Lieutenant Governor, Illinois',
+      'Attorney General, State of Illinois',
+      'Secretary of State, State of Illinois',
+      'Comptroller, State of Illinois',
+      'Treasurer, State of Illinois',
+      'U.S. Representative, 5th District',
+      'State Senator, 27th District',
+      'Commissioner, Water Reclamation Dist',
+      'Commissioner, Water Reclamation Dist 2 yr',
+      'Board President, Cook County',
+      'Clerk, Cook County',
+      'Sheriff, Cook County',
+      'Treasurer, Cook County',
+      'Assessor, Cook County',
+      'State Representative, 54th District'
+    ];    
     function applyModifications() {
-      const ccDoc = ccframe.contentWindow.document;
+      const proxyDoc = ccframe.contentWindow.document;
+      const innerFrame = proxyDoc.querySelector('iframe');
+      if (!innerFrame) return; // inner iframe not loaded yet
+      const ccDoc = innerFrame.contentWindow.document;
+      if (!ccDoc || !ccDoc.querySelector('.panel.contest')) return; // content not ready
     
       const searchPanel = ccDoc.querySelector('.row.searchText.small.p-3.mb-3');
       if (searchPanel) searchPanel.style.display = 'none';
@@ -35,41 +58,22 @@
       const racePanel = ccDoc.querySelector('.row.panel.mb-3.pt-2.pb-2.pl-4.search');
       if (racePanel) racePanel.style.display = 'none';
     
-      // Define which races to KEEP (match by text)
-      const keepRaces = [
-        'Senator, U.S.',
-        'Governor & Lieutenant Governor, Illinois',
-        'Attorney General, State of Illinois',
-        'Secretary of State, State of Illinois',
-        'Comptroller, State of Illinois',
-        'Treasurer, State of Illinois',
-        'U.S. Representative, 5th District',
-        'State Senator, 27th District',
-        'Commissioner, Water Reclamation Dist',
-        'Commissioner, Water Reclamation Dist 2 yr',
-        'Board President, Cook County',
-        'Clerk, Cook County',
-        'Sheriff, Cook County',
-        'Treasurer, Cook County',
-        'Assessor, Cook County',
-        'State Representative, 54th District'
-      ];
-    
       const contestPanels = ccDoc.querySelectorAll('.panel.contest');
-      for (let i = 0; i < contestPanels.length; i++) {
-        const text = contestPanels[i].textContent;
-        const isMatch = keepRaces.some(race => text.includes(race));
-        contestPanels[i].style.display = isMatch ? 'block' : 'none';
+      for (const panel of contestPanels) {
+        const text = panel.textContent;
+        panel.style.display = keepRaces.some(r => text.includes(r)) ? 'block' : 'none';
       }
-    }   
+    }
     
-    // Run the DOM mods only after the iframe has actually loaded
-    ccframe.addEventListener('load', applyModifications);
+    // Hook into the inner iframe's load event
+    const proxyDoc = ccframe.contentWindow.document;
+    const innerFrame = proxyDoc.querySelector('iframe');
+    innerFrame.addEventListener('load', applyModifications);
     
-    // Refresh by reloading the iframe every 5 minutes
+    // Auto-refresh every 5 minutes
     setInterval(function () {
-      const baseSrc = ccframe.src.split('?')[0]; // strip any previous ?timestamp
-      ccframe.src = baseSrc + '?t=' + Date.now();
-    }, refreshInterval);   
+      const baseSrc = innerFrame.src.split('?')[0];
+      innerFrame.src = baseSrc + '?t=' + Date.now();
+    }, refreshInterval);
   </script>
 </body>

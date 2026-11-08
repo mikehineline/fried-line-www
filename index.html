@@ -75,11 +75,11 @@
 	                    <h1>Mike Hineline - Portfolio</h1>
 	                    <h4>My web development portfolio is divided into 4 segments:</h4>
 						<ul>
-						    <li><a class="headerLink" href="#publications">Publications <span class="badge bg-secondary">2</span> — Applications that I have created and published.</a></li>
-						    <li><a class="headerLink" href="#freelance">Freelance Work <span class="badge bg-secondary">13</span> — Sites that I created as an independent consultant at the self-owned <em>fried-line productions</em>.</a></li>
-						    <li><a class="headerLink" href="#motorola">Work at Motorola <span class="badge bg-secondary">3</span> — Tools and platform management work I performed while working at Motorola.  I created the tools as a &quot;citizen developer&quot; outside of the responsibilities of my roles in order to quickly fill tooling gaps.</a></li>
-						    <li><a class="headerLink" href="#refinery">Work at Refinery <span class="badge bg-secondary">7</span> — I created these websites while working as a web developer at Image Refinery (which was subequently Refinery, G2 Interactive, and now Geometry Global.)</a></li>
-						    <li><a class="headerLink" href="#certifications">Certifications <span class="badge bg-secondary">11</span> — Certifications that I have earned relevant to web development and CRM consulting.</a></li>
+						    <li><a class="headerLink" href="#publications">Publications</a> <span class="badge bg-secondary">2</span> — Applications that I have created and published.</li>
+						    <li><a class="headerLink" href="#freelance">Freelance Work</a> <span class="badge bg-secondary">13</span> — Sites that I created as an independent consultant at the self-owned <em>fried-line productions</em>.</li>
+						    <li><a class="headerLink" href="#motorola">Work at Motorola</a> <span class="badge bg-secondary">3</span> — Tools and platform management work I performed while working at Motorola.  I created the tools as a &quot;citizen developer&quot; outside of the responsibilities of my roles in order to quickly fill tooling gaps.</li>
+						    <li><a class="headerLink" href="#refinery">Work at Refinery</a> <span class="badge bg-secondary">7</span> — I created these websites while working as a web developer at Image Refinery (which was subequently Refinery, G2 Interactive, and now Geometry Global.)</li>
+						    <li><a class="headerLink" href="#certifications">Certifications</a> <span class="badge bg-secondary">11</span> — Certifications that I have earned relevant to web development and CRM consulting.</li>
 						</ul>   
 	                </div>
 	            </div>
@@ -907,10 +907,12 @@
 	<!-- Bootstrap and jQuery custom JavaScript
 	================================================== -->
 	<script>
+	// Auto-collapse the overview accordion once the user picks a section
 	document.querySelectorAll('a[data-bs-toggle="tab"]').forEach(function (link) {
 	    link.addEventListener('shown.bs.tab', function () {
 	        const el = document.getElementById('portfolioDescription');
-	        bootstrap.Collapse.getOrCreateInstance(el).hide();
+	        const instance = bootstrap.Collapse.getOrCreateInstance(el);
+	        if (instance._isShown) instance.hide();
 	    });
 	});
 	</script>

@@ -62,45 +62,44 @@
     </div>
 	</nav>
 
-
-		
-		
-		
-	<! -- Jumbotron -->
-	<div id="mrhJumbotron" class="jumbotron portfolioHeader">
-		<div class="panel-group" id="accordion">
-			<div id="headerPanel" class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#portfolioDescription">Mike Hineline - portfolio overview</a>
-						<button type="button" class="close" aria-hidden="true" data-toggle="collapse" data-parent="#accordion" href="#portfolioDescription">&times;</button>
-					</h4>
-				</div>
-				<div id="portfolioDescription" class="panel-collapse collapse in">
-					<h1>Mike Hineline - Portfolio</h1>
-					<h4>My web development portfolio is divided into 4 segments: <br /><br />
-						<ul>
-							<li><p>
-								<a class="headerLink" href="#publications" data-toggle="tab">Publications</a> <span class="badge">2</span> - Applications that I have created and published
-							</p></li>
-							<li><p>
-								<a class="headerLink" href="#freelance" data-toggle="tab">Freelance Work</a> <span class="badge">13</span> - Sites that I created as an independent consultant at the self-owned <em>fried-line productions</em>
-							</p></li>
-							<li><p>
-								<a class="headerLink" href="#motorola" data-toggle="tab">Work at Motorola</a> <span class="badge">3</span> - Tools and platform management work I performed while working at Motorola.  I created the tools as a &quot;citizen developer&quot; outside of the responsibilities of my roles in order to quickly fill tooling gaps.
-							</p></li>
-							<li><p>
-								<a class="headerLink" href="#refinery" data-toggle="tab">Work at Refinery</a> <span class="badge">7</span></a> - I created these websites while working as a web developer at Image Refinery (which was subequently Refinery, G2 Interactive, and now Geometry Global)
-							</p></li>
-							<li><p>
-								<a class="headerLink" href="#certifications" data-toggle="tab">Certifications</a> <span class="badge">11</span> - Certifications that I have earned relevant to web development and CRM consulting
-							</p></li>
-						</ul>
-					</h4>
-				</div>
-			</div>
-		</div>
-	</div> <! -- /Jumbotron -->
+	<! -- Jumbotron (replacement) -->
+	<div id="mrhJumbotron" class="p-5 bg-light rounded-3 portfolioHeader">
+	    <div class="accordion" id="accordion">
+	        <div id="headerPanel" class="accordion-item">
+	            <h2 class="accordion-header">
+	                <button class="accordion-button" type="button"
+	                        data-bs-toggle="collapse" data-bs-target="#portfolioDescription">
+	                    Mike Hineline - portfolio overview
+	                </button>
+	            </h2>
+	            <div id="portfolioDescription" class="accordion-collapse collapse show"
+	                 data-bs-parent="#accordion">
+	                <div class="accordion-body">
+	                    <h1>Mike Hineline - Portfolio</h1>
+	                    <h4>My web development portfolio is divided into 4 segments:</h4>
+	                    <ul>
+	                        <li><a class="headerLink" href="#publications" data-bs-toggle="tab">Publications</a>
+	                            <span class="badge bg-secondary">2</span> — Applications that I have created and published.
+							</li>
+	                        <li><a class="headerLink" href="#freelance" data-bs-toggle="tab">Freelance Work</a>
+	                            <span class="badge bg-secondary">2</span> — Sites that I created as an independent consultant at the self-owned <em>fried-line productions</em>.
+							</li>
+	                        <li><a class="headerLink" href="#motorola" data-bs-toggle="tab">Work at Motorola</a>
+	                            <span class="badge bg-secondary">2</span> — Tools and platform management work I performed while working at Motorola.  I created the tools as a &quot;citizen developer&quot; outside of the responsibilities of my roles in order to quickly fill tooling gaps.
+							</li>
+	                        <li><a class="headerLink" href="#refinery" data-bs-toggle="tab">Work at Refinery</a>
+	                            <span class="badge bg-secondary">2</span> — I created these websites while working as a web developer at Image Refinery (which was subequently Refinery, G2 Interactive, and now Geometry Global.)
+							</li>
+	                        <li><a class="headerLink" href="#certifications" data-bs-toggle="tab">Certifications</a>
+	                            <span class="badge bg-secondary">2</span> — Certifications that I have earned relevant to web development and CRM consulting.
+							</li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>   
+	<! -- /Jumbotron (replacement)-->
 
 	<! -- Content Body -->
 	<div class="container">

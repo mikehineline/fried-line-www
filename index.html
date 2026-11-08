@@ -927,12 +927,23 @@
 
 	<!-- Bootstrap and jQuery custom JavaScript
 	================================================== -->
+	<script>
+	document.querySelectorAll('a[data-bs-toggle="tab"]').forEach(function (link) {
+	    link.addEventListener('shown.bs.tab', function () {
+	        const el = document.getElementById('portfolioDescription');
+	        bootstrap.Collapse.getOrCreateInstance(el).hide();
+	    });
+	});
+	</script>
+	
+	<!--
 	<script type="text/javascript">
 		// Collapse the portfolio overview in the jumbotron when a section is selected
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			$("#portfolioDescription").collapse();
 		})
 	</script>
+	-->
 
 	<!-- Google Analytics JavaScript
 	================================================== -->
